@@ -1,0 +1,103 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "rules": {
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": [".svg"]
+      }
+    ],
+    "object-curly-spacing": ["warn", "always"],
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "none"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "none"
+      }
+    ],
+    "@typescript-eslint/no-explicit-any": [
+      "error",
+      {
+        "ignoreRestArgs": true
+      }
+    ],
+    "no-plusplus": [
+      "error",
+      {
+        "allowForLoopAfterthoughts": true
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.test.js",
+          "**/*.test.jsx",
+          "**/*.test.ts",
+          "**/*.test.tsx",
+          "src/tests/**/*"
+        ]
+      }
+    ],
+    "import/default": "off",
+    "@typescript-eslint/explicit-function-return-type": ["error"],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "default",
+        "format": ["camelCase"]
+      },
+      {
+        "selector": "variable",
+        "format": ["PascalCase", "camelCase"]
+      },
+      {
+        "selector": "parameter",
+        "format": ["camelCase"],
+        "leadingUnderscore": "allow"
+      },
+      {
+        "selector": "memberLike",
+        "modifiers": ["private"],
+        "format": ["camelCase"],
+        "leadingUnderscore": "require"
+      },
+      {
+        "selector": "memberLike",
+        "format": ["camelCase", "PascalCase"]
+      },
+      {
+        "selector": "typeLike",
+        "format": ["PascalCase"]
+      }
+    ]
+  }
+}
