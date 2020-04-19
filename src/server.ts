@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { ApolloServer } from "apollo-server-express";
 
 import typeDefs from "./schemas";
-import resolvers from "./resolvers/Books";
+import resolvers from "./resolvers";
 
 const app = express();
 
