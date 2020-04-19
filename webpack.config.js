@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   name: 'server',
   entry: './src/app.ts',
+  mode: 'development',
   target: 'node',
   node: {
     __dirname: false,
@@ -16,14 +17,14 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(graphql|gql)$/,
-        exclude: /node_modules/,
-        loader: 'graphql-tag/loader',
-      },
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: "javascript/auto",
+      }
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.gql'],
+    extensions: ['.tsx', '.ts', '.js', '.gql', '.mjs'],
   },
   output: {
     filename: 'bundle.js',

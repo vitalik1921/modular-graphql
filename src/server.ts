@@ -1,9 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
-import graphqlHTTP from "express-graphql";
+import { ApolloServer } from "apollo-server-express";
 
-import schemas from "./schemas";
-import resolvers from "./resolvers";
+import typeDefs from "./schemas";
+import resolvers from "./resolvers/Books";
 
 const app = express();
 
@@ -17,14 +17,11 @@ dbConnection.on("error", (err) => console.log("Connection error: ", err));
 dbConnection.once("open", () => console.log("Connected to DB!"));
 
 // The GraphQL endpoint
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: schemas,
-    rootValue: resolvers,
-    graphiql: true,
-  })
-);
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+server.applyMiddleware({ app, path: "/graphql" });
 
 app.set("port", process.env.PORT || 3000);
 
