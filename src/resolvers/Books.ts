@@ -1,14 +1,23 @@
-import Books from "../models/book";
+import Author from "../models/author";
+import Book from "../models/book";
 
-export const Query = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  book: (obj: any, { id }: any): any => {
-    return Books.findById(id);
+const resolvers = {
+  Query: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    book: (parent: any, { id }: any): any => {
+      return Book.findById(id);
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    books: (): any => {
+      return Book.find({});
+    },
   },
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  books: (obj: any, args: any): any => {
-    return Books.find({});
+  Book: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    author: (parent: any, args: any): any => {
+      return Author.findById(parent.authorId);
+    },
   },
 };
 
-export const Mutation = {};
+export default resolvers;
