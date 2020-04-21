@@ -1,12 +1,5 @@
-import { gql } from "apollo-server-express";
-import * as Books from "./Books";
-import * as Authors from "./Authors";
+import Root from "./root.gql";
+import Authors from "./author.gql";
+import Books from "./book.gql";
 
-export default gql`
-  ${Books.types}
-  ${Authors.types}
-  type Query {
-    ${Books.queries}
-    ${Authors.queries}
-  }
-`;
+export default [Root, Books, Authors];

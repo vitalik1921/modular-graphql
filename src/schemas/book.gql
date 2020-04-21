@@ -3,13 +3,7 @@ type Book {
 	author: Author
 }
 
-type Author {
-	name: String
-	books: [Book]
-}
-
-type Query {
+ extend type Query {
 	book(id: ID!): Book, 
 	books: [Book],
-  authors: [Author],
 }

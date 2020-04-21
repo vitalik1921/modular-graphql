@@ -1,7 +1,11 @@
 import { merge } from "lodash";
-import Books from "./Books";
-import Authors from "./Authors";
+import Books from "./book";
+import Authors from "./author";
 
-console.log("merge(Books, Authors)", merge(Books, Authors));
+const rootResolvers = {
+  Query: {
+    empty: (): string => "empty",
+  },
+};
 
-export default merge(Books, Authors);
+export default merge(rootResolvers, Books, Authors);
