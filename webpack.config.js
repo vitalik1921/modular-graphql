@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   name: 'server',
-  entry: './src/app.ts',
+  entry: './src/index.ts',
   mode: 'development',
   target: 'node',
   node: {

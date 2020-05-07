@@ -1,28 +1,28 @@
-import express from "express";
-import mongoose from "mongoose";
-import { ApolloServer } from "apollo-server-express";
+import "./plugins/mongo";
 
-import typeDefs from "./schemas";
+import { ApolloServer } from "apollo-server-express";
+import express from "express";
+
+import passport from "./plugins/passport";
 import resolvers from "./resolvers";
+import typeDefs from "./schemas";
 
 const app = express();
 
-mongoose.connect("mongodb://127.0.0.1:27017", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const dbConnection = mongoose.connection;
-dbConnection.on("error", (err) => console.log("Connection error: ", err));
-dbConnection.once("open", () => console.log("Connected to DB!"));
-
-// The GraphQL endpoint
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
 server.applyMiddleware({ app, path: "/graphql" });
 
-app.set("port", process.env.PORT || 3000);
+app.use(passport.initialize());
 
-export default app;
+// run server
+app.listen(process.env.PORT || 3000, () => {
+  console.log(
+    "  App is running at http://localhost:%d in %s mode",
+    app.get("port"),
+    app.get("env")
+  );
+  console.log("  Press CTRL-C to stop\n");
+});
